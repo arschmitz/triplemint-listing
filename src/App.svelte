@@ -1,1 +1,5 @@
-<h1>Triplemint</h1>
+<script>
+  import Header from "./Header.svelte"
+</script>
+
+<Header/>

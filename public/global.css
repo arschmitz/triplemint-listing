@@ -8,3 +8,42 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
+
+select {
+	display: flex;
+  align-items: center;
+  width: auto;
+  height: auto;
+  background-color: #fff;
+  background: url(https://static.triplemint.com/jupiter/a9f7f1f974cf4e7690ddf77c6308317a3ccd70c1/static/images/expand.svg) no-repeat right 10px center;
+  background-size: 10px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+  border: 1px solid #d8d8d8;
+  resize: none;
+  outline: 0;
+  outline-color: initial;
+  outline-style: initial;
+  outline-width: 0;
+  font-size: 120%;
+}
+
+option {
+  font-weight: normal;
+  display: block;
+  white-space: pre;
+  min-height: 1.2em;
+  padding: 0px 2px 1px;
+}
+
+a {
+    text-decoration: none;
+    color: #404040;
+}
+
+ul, li {
+    padding: 0;
+    list-style: none;
+}
