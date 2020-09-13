@@ -24,24 +24,6 @@
     display: inline-block;
   }
 
-  .header-container {
-    display: grid;
-    grid-template-columns: auto 420px;
-    grid-template-rows: auto 42px 1fr;
-    grid-column-gap: 0;
-    grid-row-gap: 0;
-    grid-template-areas:
-        "menu menu"
-        "panel navigator"
-        "panel map";
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    font-family: 'Open Sans', sans-serif;
-    color: #404040;
-    overflow: hidden;
-  }
-
 	.logo {
 		grid-area: logo;
     justify-self: center;
@@ -134,8 +116,7 @@
     cursor: not-allowed;
   }
 </style>
-
-<div class="header-container">
+<section>
   <header class="header">
   	<a class="logo" href="https://triplemint.com">
   		<img class="logo-image" src="https://static.triplemint.com/jupiter/a9f7f1f974cf4e7690ddf77c6308317a3ccd70c1/static/images/triplemint.svg" alt="logo">
@@ -179,4 +160,4 @@
       </div>
     </div>
   </header>
-</div>
+</section>

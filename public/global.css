@@ -28,6 +28,11 @@ select {
   outline-style: initial;
   outline-width: 0;
   font-size: 120%;
+  color: #404040;
+  font-size: 14px;
+  padding: 3px 32px 3px 5px;
+  padding-top: 6px;
+  padding-bottom: 6px;
 }
 
 option {
