@@ -1,3 +1,54 @@
+<script>
+  import { listings } from './listingStore.js'
+  import Modal from './Modal.svelte'
+  import RegionFilter from './RegionFilter.svelte'
+  import BedroomFilter from './BedroomFilter.svelte'
+  import PriceFilter from './PriceFilter.svelte'
+  import MoreFilters from './MoreFilters.svelte'
+
+  const queryBase = "https://www.triplemint.com/tmapi/service/prisma/listings"
+  let sort = 'has_photo,listing_listed_date,desc'
+  let open
+  let resultCount = 0
+
+  const filters = {
+    fev: 'a9f7f1f974cf4e7690ddf77c6308317a3ccd70c1',
+    listing_type: 'SALE',
+    locality: 'ny:nyc',
+    building_types_operator: 'include',
+    status: 'active',
+    time_share: 'false'
+  }
+
+  async function fetchListings () {
+    let filterString = ''
+
+    Object.keys(filters).forEach((key) => {
+      if (!filters[key]) {
+        return
+      }
+      filterString += `&${key}=${filters[key]}`
+    })
+    const results = await fetch(`${queryBase}?order=${sort}&ui=card&limit=18&skip=0${filterString}`)
+    .then(r => r.json())
+
+    $listings = results.models
+
+    const count = await fetch(`${queryBase}/count?order=${sort}${filterString}`)
+    .then(r => r.json())
+
+    resultCount = count.count.toLocaleString()
+  }
+
+  function updateFilters (name, value) {
+    filters[name] = value
+
+    fetchListings()
+  }
+
+  fetchListings()
+</script>
+
 <style>
   .search-menu {
     grid-area: menu;
@@ -7,6 +58,7 @@
     position: fixed;
     top: 55px;
     width: 100%;
+    z-index: 1;
   }
 
   .justified-list {
@@ -79,6 +131,10 @@
     color: #404040;
   }
 
+  .filter-section {
+    border-bottom: 1px solid #d4d4d4;
+  }
+
   .results {
     min-width: 50px;
     font-family: 'Open Sans', sans-serif;
@@ -125,16 +181,16 @@
     <li class="justified-item">
       <button class="search-icon filter-button"></button>
     </li>
-    <li class="justified-item filter">Neighborhoods</li>
-    <li class="justified-item filter">Price</li>
-    <li class="justified-item filter">Bedrooms</li>
-    <li class="justified-item filter">More Filters</li>
+    <li class="justified-item filter" on:click="{e => open = 'region'}">Neighborhoods</li>
+    <li class="justified-item filter" on:click="{e => open = 'price'}">Price</li>
+    <li class="justified-item filter" on:click="{e => open = 'bedroom'}">Bedrooms</li>
+    <li class="justified-item filter" on:click="{e => open = 'more'}">More Filters</li>
     <li class="justified-item">
       <button class="save-filter filter-button">Save</button>
       <button class="reset-filter filter-button">Clear</button>
     </li>
     <li class="justified-item">
-      <select class="filter-select">
+      <select class="filter-select" bind:value={sort} on:change={fetchListings}>
         <option value="has_photo,listing_listed_date,desc">Sort: Default</option>
         <option value="listing_listed_date,desc">Newest</option>
         <option value="last_updated_on,desc">Last Updated</option>
@@ -145,7 +201,7 @@
         <option value="photos">Photo: Default</option>
         <option value="floorplans">Floorplans</option>
       </select>
-      <span class="results">13,183 <span> Results</span></span>
+      <span class="results">{resultCount} <span> Results</span></span>
     </li>
     <li class="justified-item">
       <button class="cards-grid filter-button"></button>
@@ -186,7 +242,7 @@
       <div class="dropdown-menu order-menu">
         <button class="order-menu"></button>
         <div class="menu-options" style="display: none;">
-          <ul data-bind="foreach: options">
+          <ul >
             <li>
               <div class="text">Default</div>
             </li>
@@ -329,3 +385,24 @@
   </ul>
   <ul id="tag-list-component" class="left-aligned-list tags"></ul>-->
 </div>
+{#if open === 'bedroom'}
+  <Modal on:close="{e => open = false}">
+    <BedroomFilter on:update="{event => updateFilters(event.detail.name, event.detail.filter)}"/>
+  </Modal>
+{/if}
+{#if open === 'region'}
+  <Modal on:close="{e => open = false}">
+    <RegionFilter on:update="{event => updateFilters(event.detail.name, event.detail.filter)}"/>
+  </Modal>
+{/if}
+{#if open === 'price'}
+  <Modal on:close="{e => open = false}">
+    <PriceFilter on:update="{event => updateFilters(event.detail.name, event.detail.filter)}"/>
+  </Modal>
+{/if}
+
+{#if open === 'more'}
+  <Modal on:close="{e => open = false}">
+    <MoreFilters on:update="{event => updateFilters(event.detail.name, event.detail.filter)}"/>
+  </Modal>
+{/if}

@@ -1,7 +1,6 @@
 <script>
-  import Header from "./Header.svelte"
-  import SearchBar from "./SearchBar.svelte"
-  import ListingGrid from "./ListingGrid.svelte"
+  import ListingCard from "./ListingCard.svelte"
+  import { listings } from './listingStore.js'
 </script>
 
 <style>
@@ -18,6 +17,7 @@
     width: 100%;
     height: 100%;
     box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
     color: #404040;
   }
 
@@ -33,8 +33,9 @@
   }
 </style>
 
-<div class="page-container">
-  <Header/>
-  <SearchBar/>
-  <ListingGrid/>
+
+<div class="listing-grid">
+  {#each $listings as listing}
+      <ListingCard bind:listing={listing}/>
+  {/each}
 </div>
