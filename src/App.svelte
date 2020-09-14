@@ -1,6 +1,7 @@
 <script>
   import Header from "./Header.svelte"
   import SearchBar from "./SearchBar.svelte"
+  import ListingCard from "./ListingCard.svelte"
 </script>
 
 <style>
@@ -19,11 +20,24 @@
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
     color: #404040;
-    overflow: hidden;
+  }
+
+  .listing-grid {
+    display: grid;
+    grid-auto-rows: 360px;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-gap: 10px;
+    padding: 10px;
+    position: relative;
+    outline: none;
+    padding-top: 112px;
   }
 </style>
 
 <div class="page-container">
   <Header/>
   <SearchBar/>
+  <div class="listing-grid">
+    <ListingCard/>
+  </div>
 </div>

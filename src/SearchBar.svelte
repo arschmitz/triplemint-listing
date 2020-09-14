@@ -145,7 +145,7 @@
         <option value="photos">Photo: Default</option>
         <option value="floorplans">Floorplans</option>
       </select>
-      <span class="results">2,077<span> Results</span></span>
+      <span class="results">13,183 <span> Results</span></span>
     </li>
     <li class="justified-item">
       <button class="cards-grid filter-button"></button>
