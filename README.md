@@ -22,3 +22,7 @@ Triplemint interview assignment. A recreation of the listing page at [https://ww
 Uses standard style [https://standardjs.com/](https://standardjs.com/)
 
 * `npm run lint`
+
+## Tests
+
+* `npm run test`
