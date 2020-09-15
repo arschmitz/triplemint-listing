@@ -1,10 +1,11 @@
 <script>
-  import { listings } from './listingStore.js'
+  import { listings } from './listingStore'
   import Modal from './Modal.svelte'
   import RegionFilter from './RegionFilter.svelte'
   import BedroomFilter from './BedroomFilter.svelte'
   import PriceFilter from './PriceFilter.svelte'
   import MoreFilters from './MoreFilters.svelte'
+  import Listing from './listing'
 
   const queryBase = "https://www.triplemint.com/tmapi/service/prisma/listings"
   let sort = 'has_photo,listing_listed_date,desc'
@@ -32,7 +33,7 @@
     const results = await fetch(`${queryBase}?order=${sort}&ui=card&limit=18&skip=0${filterString}`)
     .then(r => r.json())
 
-    $listings = results.models
+    $listings = results.models.map((model) => new Listing(model))
 
     const count = await fetch(`${queryBase}/count?order=${sort}${filterString}`)
     .then(r => r.json())
