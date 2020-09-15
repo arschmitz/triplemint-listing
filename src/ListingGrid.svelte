@@ -1,6 +1,6 @@
 <script>
   import ListingCard from "./ListingCard.svelte"
-  import { listings } from './listingStore.js'
+  import { filteredListings } from './listingStore.js'
 </script>
 
 <style>
@@ -16,7 +16,7 @@
 
 
 <div class="listing-grid">
-  {#each $listings as listing}
+  {#each $filteredListings as listing}
       <ListingCard bind:listing={listing}/>
   {/each}
 </div>

@@ -1,6 +1,10 @@
 <script>
-  import { display } from './displayStore'
+  import { display } from './listingStore'
   export let listing
+
+  function currency (amount) {
+    return Number((amount).toFixed(1)).toLocaleString()
+  }
 </script>
 
 <style type="text/css">
@@ -96,7 +100,7 @@
       <p class="neighborhood">{listing.neighborhood}</p>
     </div>
     <div class="list-info">
-      <p class="price" >${listing.price}</p>
+      <p class="price" >${currency(listing.price)}</p>
       <p class="summary">
         {listing.bedrooms} BD, {listing.bathrooms} BA,
         {#if listing.squareFeet}

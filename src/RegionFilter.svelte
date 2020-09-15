@@ -8,14 +8,14 @@
   let activeRegionIndex = 2
 
   function updateFilter (data) {
-    if (activeRegions.indexOf(data.detail.id) > -1) {
-      activeRegions.splice(activeRegions.indexOf(data.detail.id), 1)
+    if (activeRegions.indexOf(data.detail.text) > -1) {
+      activeRegions.splice(activeRegions.indexOf(data.detail.text), 1)
     } else {
-      activeRegions.push(data.detail.id)
+      activeRegions.push(data.detail.text)
     }
 
     dispatch('update', {
-      filter: activeRegions.join(','),
+      filter: activeRegions,
       name: 'region'
     })
   }

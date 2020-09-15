@@ -1,8 +1,5 @@
-function currency (amount) {
-  return Number((amount).toFixed(1)).toLocaleString()
-}
-
 const imageBase = 'https://dyn-images.triplemint.com/production/images/unit/'
+
 export default class Listing {
   constructor (data) {
     this._data = data
@@ -33,7 +30,22 @@ export default class Listing {
   }
 
   get price () {
-    return currency(this._data.price)
+    return this._data.price
+  }
+
+  get region () {
+    return this._data.unit.building.region.text
+  }
+
+  get listedDate () {
+    return Date.parse(this._data.listed_date)
+  }
+
+  get days () {
+    const today = new Date()
+    const listed = Date.parse(this._data.listed_date)
+
+    return (today.getTime() - listed) / (1000 * 3600 * 24)
   }
 
   get image () {

@@ -5,50 +5,93 @@
   import MoreFilters from './MoreFilters.svelte'
   import PriceFilter from './PriceFilter.svelte'
   import RegionFilter from './RegionFilter.svelte'
-  import { listings } from './listingStore'
-  import { display } from './displayStore'
+  import { listings } from './listingData'
+  import { filteredListings, display } from './listingStore'
 
-  const queryBase = "https://www.triplemint.com/tmapi/service/prisma/listings"
-  let sort = 'has_photo,listing_listed_date,desc'
+  const filters = {}
+  let sort = 'has_image,listedDate,desc'
   let open
   let resultCount = 0
 
-  const filters = {
-    building_types_operator: 'include',
-    fev: 'a9f7f1f974cf4e7690ddf77c6308317a3ccd70c1',
-    listing_type: 'SALE',
-    locality: 'ny:nyc',
-    status: 'active',
-    time_share: 'false'
-  }
-
-  async function fetchListings () {
-    let filterString = ''
+  function filterListings () {
+    let filteredResults = $listings
 
     Object.keys(filters).forEach((key) => {
-      if (!filters[key]) {
-        return
-      }
-      filterString += `&${key}=${filters[key]}`
+      filteredResults = filteredResults.filter((item) => {
+        if (!filters[key].length) {
+          return true
+        }
+
+        if (typeof filters[key] === 'string') {
+          const realKey = key.substring(4)
+
+          if (/^min/.test(key)) {
+            return item[key.substring(4)] >= parseFloat(filters[key])
+          }
+
+          if (/^max/.test(key)) {
+            return item[key.substring(4)] <= parseFloat(filters[key])
+          }
+        }
+
+        return filters[key].includes(item[key].toString())
+      })
     })
-    const results = await fetch(`${queryBase}?order=${sort}&ui=card&limit=18&skip=0${filterString}`)
-    .then(r => r.json())
 
-    $listings = results.models.map((model) => new Listing(model))
+    filteredResults = filteredResults.sort((first, second) => {
+      const criteria = sort.split(',')
+      const decending = criteria[criteria.length -1] === 'desc'
+      const boolSort = /^has_/.test(criteria[0])
 
-    const count = await fetch(`${queryBase}/count?order=${sort}${filterString}`)
-    .then(r => r.json())
+      if (boolSort) {
+        criteria[0] = criteria[0].substring(4)
+      }
 
-    resultCount = count.count.toLocaleString()
+      if (decending) {
+        criteria.pop()
+      }
+
+      if (
+        (boolSort && second[criteria[0]]) ||
+        (first[criteria[0]] < second[criteria[0]] && decending) ||
+        (first[criteria[0]] > second[criteria[0]] && !decending)
+      )  {
+        if (first[criteria[0]] === second[criteria[0]]) {
+          return 0
+        }
+
+        if (
+            criteria.length > 1 &&
+            ((first[criteria[0]] === second[criteria[0]]) || (boolSort && first[criteria[0]] && second[criteria[0]]))
+          ) {
+
+          if (first[criteria[1]] === second[criteria[1]]) {
+            return 0
+          }
+
+          return (first[criteria[1]] < second[criteria[1]] && decending) || (first[criteria[1]] > second[criteria[1]] && !decending) ? 1 : -1
+        }
+
+        return 1
+      }
+
+      return -1
+
+    })
+
+
+    $filteredListings = filteredResults
+
+    resultCount = $filteredListings.length.toLocaleString()
   }
 
   function updateFilters (name, value) {
     filters[name] = value
 
-    fetchListings()
+    filterListings()
   }
 
-  fetchListings()
+  filterListings()
 </script>
 
 <style>
@@ -174,12 +217,11 @@
     </li>
     <br>
     <li class="justified-item">
-      <select class="filter-select" bind:value={sort} on:blur={fetchListings}>
-        <option value="has_photo,listing_listed_date,desc">Sort: Default</option>
-        <option value="listing_listed_date,desc">Newest</option>
-        <option value="last_updated_on,desc">Last Updated</option>
-        <option value="listing_price,desc">$ High to Low</option>
-        <option value="listing_price">$ Low to High</option>
+      <select class="filter-select" bind:value={sort} on:change={filterListings}>
+        <option value="has_image,listedDate,desc">Sort: Default</option>
+        <option value="listedDate,desc">Newest</option>
+        <option value="price,desc">$ High to Low</option>
+        <option value="price">$ Low to High</option>
       </select>
       <select class="filter-select" bind:value={$display}>
         <option value="photos">Photo: Default</option>

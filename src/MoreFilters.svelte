@@ -29,7 +29,7 @@
 </style>
 
 <h2 class="heading">BATHROOMS</h2>
-<select id="min_bathrooms" on:blur={updateFilter}>
+<select id="min_bathrooms" on:change={updateFilter}>
   <option value="0">Any Baths</option>
   <option value="1">1 or more</option>
   <option value="1.5">1.5 or more</option>
@@ -44,7 +44,7 @@
 <hr>
 
 <h2 class="heading">SQUARE FEET</h2>
-<select id="min_surface" on:blur={updateFilter}>
+<select id="min_surface" on:change={updateFilter}>
   <option value="">Any</option>
   <option value="300">300+</option>
   <option value="400">400+</option>
@@ -65,12 +65,12 @@
 </select>
 
 <label for="unknown_surface">Include unknown</label>
-<input id="unknown_surface" type="checkbox" on:blur={updateFilter}>
+<input id="unknown_surface" type="checkbox" on:change={updateFilter}>
 
 <hr>
 
 <h2 class="heading">YEAR BUILT</h2>
-<select class="inline-select" id="max_year" on:blur={updateFilter}>
+<select class="inline-select" id="max_year" on:change={updateFilter}>
   <option value=""></option>
 	<option value="1600">Before 1900</option>
 	{#each years as year, index}
@@ -78,7 +78,7 @@
   {/each}
 </select>
 to
-<select class="inline-select" id="min_year" on:blur={updateFilter}>
+<select class="inline-select" id="min_year" on:change={updateFilter}>
   <option value=""></option>
   <option value="1600">Before 1900</option>
   {#each years as year, index}
@@ -93,7 +93,7 @@ to
 
 <div class="inline-select">
   <label for="min_days">Min Days</label>
-  <select id="min_days" on:blur={updateFilter}>
+  <select id="min_days" on:change={updateFilter}>
     <option value=""></option>
   	<option value="0">Just Listed</option>
   	<option value="1">1</option>
@@ -125,7 +125,7 @@ to
 
 <div class="inline-select">
   <label for="max_days">Max Days</label>
-  <select id="max_days" on:blur={updateFilter}>
+  <select id="max_days" on:change={updateFilter}>
     <option value=""></option>
     <option value="0">Just Listed</option>
     <option value="1">1</option>

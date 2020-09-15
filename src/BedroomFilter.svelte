@@ -12,7 +12,7 @@
     }
 
     dispatch('update', {
-      filter: bedrooms.join(','),
+      filter: bedrooms,
       name: 'bedrooms'
     })
 
