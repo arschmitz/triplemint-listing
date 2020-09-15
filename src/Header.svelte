@@ -1,163 +1,139 @@
 <style>
 	.header {
-		position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 10;
-    text-align: left;
-    background-color: #fff;
-    border-bottom: 1px solid #eee;
-    display: grid;
-    grid-template-columns: 200px auto auto 0;
-    grid-template-rows: 52px 2px;
-    grid-template-areas:
-        "logo menuItems secondaryMenu hamburger"
-        "progress progress progress progress";
+    position: fixed;
     align-items: center;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
+    background: var(--white);
+    border-bottom: 1px solid var(--light-grey);
+    display: grid;
+    font-size: 0.875rem;
+    grid-template-columns: 12.5rem auto auto 0;
+    grid-template-rows: 3.25rem 0.125rem;
+    width: 100%;
+    z-index: 1;
 	}
 
-  .header > * {
-    vertical-align: middle;
-    display: inline-block;
-  }
-
 	.logo {
-		grid-area: logo;
-    justify-self: center;
-    height: 34px;
-    margin-top: 7px;
-    padding-left: 10px;
     cursor: pointer;
+    height: 2.125rem;
+    justify-self: center;
+    margin-top: 0.4375rem;
+    padding-left: 0.625rem;
 	}
 
   .logo-image {
-    width: 140px;
+    width: 8.75rem;
   }
 
 	.location {
-		grid-area: menuItems;
+    grid-area: menuItems;
     display: inline-flex;
-    margin-right: 20px;
-    margin-top: 14px;
+    margin-right: 1.25rem;
+    margin-top: 0.875rem;
 	}
 
   .location-select {
-    color: #404040;
-    font-size: 14px;
-    padding: 3px 32px 3px 5px;
-    padding-top: 6px;
-    padding-bottom: 6px;
+    color: var(--dark-grey);
+    font-size: 0.875rem;
+    padding: 0.375rem 2rem 0.375rem 0.375rem;
   }
 
   .menu {
-    grid-area: menuItems;
-    list-style-type: none;
-    padding: 0;
-    height: 55px;
-    margin: 0;
-    display: inline-flex;
+    display: none;
   }
 
   .menu-item {
-    height: 39px;
-    margin: 14px 15px 0 0;
-    display: inline-block;
-    line-height: 30px;
-    vertical-align: middle;
-    border-bottom: 3px solid transparent;
-    transition: border-bottom-color .3s;
-    overflow: hidden;
+    height: 2.4375rem;
+    line-height: 1.875rem;
+    margin: 0.875rem 0.9375rem 0 0;
   }
 
   .secondary-menu {
-    grid-area: secondaryMenu;
     justify-self: right;
-    width: auto;
-    vertical-align: middle;
+    display: none;
   }
 
   .phone {
-    height: 39px;
-    margin-top: 14px;
-    display: inline-block;
-    line-height: 30px;
-    vertical-align: middle;
+    display: none;
+    height: 2.4375rem;
+    line-height: 1.875rem;
+    margin-top: 0.875rem;
   }
 
   .phone-link {
-    padding: 10px;
+    padding: 0.625rem;
   }
 
   .login-state {
-    width: auto;
-    height: 100%;
-    padding: 0;
     display: inline-block;
-    vertical-align: middle;
-    margin-top: 3px;
   }
 
   .login-button {
-    margin-right: 20px;
-    padding: 6px 36px;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    line-height: 14px;
-    border: none;
-    cursor: pointer;
-    color: #404040;
-    background-color: #fff;
-    border: 1px solid #00d7a0;
-    line-height: 14px;
-    color: #404040;
+    background-color: var(--white);
+    border: 1px solid var(--green);
+    color: var(--dark-grey);
     cursor: not-allowed;
+    font-size: 0.875rem;
+    line-height: 0.875rem;
+    margin-right: 1.25rem;
+    padding: 0.375rem 2.25rem;
+  }
+
+  @media screen and (min-width: 61rem) {
+    .menu {
+      display: inline-flex;
+    }
+
+    .phone {
+      display: inline-block;
+    }
+  }
+
+  @media screen and (min-width: 34rem) {
+    .secondary-menu {
+      display: inline-block;
+    }
   }
 </style>
-<section>
-  <header class="header">
-  	<a class="logo" href="https://triplemint.com">
-  		<img class="logo-image" src="https://static.triplemint.com/jupiter/a9f7f1f974cf4e7690ddf77c6308317a3ccd70c1/static/images/triplemint.svg" alt="logo">
-  	</a>
-  	<div>
-  		<div class="location">
-  			<select class="location-select">
-  				<option value="ny:nyc">New York City, NY</option>
-  				<option value="nj:hudson">Hudson County, NJ</option>
-  			</select>
-  		</div>
-  		<ul class="menu">
-  			<li class="menu-item">
-  				<a href="https://triplemint.com/listings?listing_type=sale">Buy</a>
-  			</li>
-  			<li class="menu-item">
-  				<a href="https://triplemint.com/sell">Sell</a>
-  			</li>
-  			<li class="menu-item">
-  				<a href="https://triplemint.com/listings?listing_type=rental">Rent</a>
-  			</li>
-  			<li class="menu-item">
-  				<a href="https://triplemint.com/agents">Agents</a>
-  			</li>
-  			<li class="menu-item">
-  				<a href="https://triplemint.com/press">Press</a>
-  			</li>
-  			<li class="menu-item">
-  				<a href="https://triplemint.com/how-it-works">How It Works</a>
-  			</li>
-  		</ul>
-  	</div>
-    <div class="secondary-menu">
-      <div class="phone">
-        <a class="phone-link" href="tel:2122351123">212-235-1123</a>
-      </div>
-      <div class="login-state">
-        <button class="login-button" disabled>
-          Sign in
-        </button>
-      </div>
+<header class="header">
+	<a class="logo" href="https://triplemint.com">
+		<img class="logo-image" src="https://static.triplemint.com/jupiter/a9f7f1f974cf4e7690ddf77c6308317a3ccd70c1/static/images/triplemint.svg" alt="logo">
+	</a>
+	<div class="menu-wrap">
+		<div class="location">
+			<select class="location-select">
+				<option value="ny:nyc">New York City, NY</option>
+				<option value="nj:hudson">Hudson County, NJ</option>
+			</select>
+		</div>
+		<ul class="menu">
+			<li class="menu-item">
+				<a href="https://triplemint.com/listings?listing_type=sale">Buy</a>
+			</li>
+			<li class="menu-item">
+				<a href="https://triplemint.com/sell">Sell</a>
+			</li>
+			<li class="menu-item">
+				<a href="https://triplemint.com/listings?listing_type=rental">Rent</a>
+			</li>
+			<li class="menu-item">
+				<a href="https://triplemint.com/agents">Agents</a>
+			</li>
+			<li class="menu-item">
+				<a href="https://triplemint.com/press">Press</a>
+			</li>
+			<li class="menu-item">
+				<a href="https://triplemint.com/how-it-works">How It Works</a>
+			</li>
+		</ul>
+	</div>
+  <div class="secondary-menu">
+    <div class="phone">
+      <a class="phone-link" href="tel:2122351123">212-235-1123</a>
     </div>
-  </header>
-</section>
+    <div class="login-state">
+      <button class="login-button" disabled>
+        Sign in
+      </button>
+    </div>
+  </div>
+</header>

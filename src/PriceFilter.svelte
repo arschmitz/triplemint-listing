@@ -12,19 +12,16 @@
 </script>
 <style>
   .heading {
-    font-size: 16px;
-    font-weight: 700;
-    padding: 0 0 10px 0;
-    display: block;
+    font-size: 1rem;
   }
 
   .price-input {
-    margin: 10px 10px 10px 0;
-    padding: 10px;
-    font-size: 14px;
-    color: #404040;
+    border: 1px solid var(--light-grey);
+    color: var(--dark-grey);
     display: block;
-    border: 1px solid #d8d8d8;
+    font-size: 0.875rem;
+    margin: 0.625rem 0.625rem 0.625rem 0;
+    padding: 0.625rem;
   }
 
   .price-inline {

@@ -43,6 +43,11 @@ export default class Listing {
 
   get floorplan () {
     const image = this._data.unit.dyn_floorplans[0]
+
+    if (!image) {
+      return
+    }
+
     return `${imageBase}${this._data.unit.id}/x486/${image.key}.${image.extension}`
   }
 }

@@ -1,4 +1,5 @@
 <script>
+  import { display } from './displayStore'
   export let listing
 </script>
 
@@ -14,67 +15,64 @@
   }
 
   .listing-card {
-    display: inline-block;
-    height: 100%;
-    border: 1px solid #d8d8d8;
+    border: 1px solid var(--light-grey);
     cursor: pointer;
-    position: relative;
     overflow: hidden;
+    position: relative;
   }
 
   .data {
-    height: 30%;
-    padding: 10px 30px 10px 10px;
     font-family: 'ConduitMdITCTTMedium',sans-serif;
+    padding: 0.625rem 1.875rem 0.625rem 0.625rem;
     text-transform: uppercase;
   }
 
   .price {
-    line-height: 20px;
+    line-height: 1.25rem;
   }
 
   .summary {
-    font-size: 14px;
-    line-height: 14px;
-    color: #767676;
+    color: var(--medium-grey);
+    font-size: 0.875rem;
+    line-height: 0.875rem;
   }
 
   .address {
-    font-size: 20px;
-    line-height: 20px;
+    font-size: 1.25rem;
+    line-height: 1.25rem;
   }
 
   .neighborhood {
-    font-size: 14px;
-    line-height: 18px;
-    color: #767676;
+    color: var(--medium-grey);
+    font-size: 0.875rem;
+    line-height: 1.125rem;
   }
 
   .favorites {
-    width: 40px;
-    height: 40px;
-    display: flex;
     align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    position: absolute;
     bottom: 0;
+    cursor: pointer;
+    display: flex;
+    height: 2.5rem;
+    justify-content: center;
+    position: absolute;
     right: 0;
+    width: 2.5rem;
   }
 
   .favorite {
-    height: 15px;
+    height: .9375rem;
   }
 
   .thumbnail {
-    width: 405px;
     height: 70%;
+    width: 120%;
   }
 
   .image {
-    width: 100%;
     height: 100%;
     object-fit: cover;
+    width: 100%;
   }
 
 
@@ -83,7 +81,12 @@
 <div class="listing-card">
   {#if listing.image}
     <div class="thumbnail">
-      <img class="image" src={listing.image}>
+      {#if (listing.image && $display === 'photos') || !listing.floorplan }
+        <img class="image" src={listing.image} alt="">
+      {:else}
+        <img class="image" src={listing.floorplan} alt="floorplan">
+      {/if}
+
     </div>
   {/if}
   <div class="grid-bottom"></div>
@@ -104,8 +107,6 @@
     </div>
   </div>
   <div class="favorites" >
-    <img class="favorite" src="https://static.triplemint.com/jupiter/a9f7f1f974cf4e7690ddf77c6308317a3ccd70c1/static/images/favorite.svg"></div>
-    <div class="selection grid">
-      <input class="listing-collection" type="checkbox" value="" style="display: none;">
+    <img class="favorite" alt="heart" src="https://static.triplemint.com/jupiter/a9f7f1f974cf4e7690ddf77c6308317a3ccd70c1/static/images/favorite.svg">
   </div>
 </div>

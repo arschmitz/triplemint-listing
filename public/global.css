@@ -1,3 +1,12 @@
+:root {
+  --dark-grey: #404040;
+  --light-grey: #d4d4d4;
+  --off-white: #00d7a0;
+  --medium-grey: #767676;
+  --green: #00d7a0;
+  --white: #fff;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -15,21 +24,21 @@ select {
   align-items: center;
   width: auto;
   height: auto;
-  background-color: #fff;
+  background-color: var(--white);
   background: url(https://static.triplemint.com/jupiter/a9f7f1f974cf4e7690ddf77c6308317a3ccd70c1/static/images/expand.svg) no-repeat right 10px center;
   background-size: 10px;
   -webkit-appearance: none;
   -moz-appearance: none;
   cursor: pointer;
   font-family: 'Open Sans', sans-serif;
-  border: 1px solid #d8d8d8;
+  border: 1px solid var(--light-grey);
   resize: none;
   outline: 0;
   outline-color: initial;
   outline-style: initial;
   outline-width: 0;
   font-size: 120%;
-  color: #404040;
+  color: var(--dark-grey);
   font-size: 14px;
   padding: 3px 32px 3px 5px;
   padding-top: 6px;
@@ -46,7 +55,7 @@ option {
 
 a {
   text-decoration: none;
-  color: #404040;
+  color: var(--dark-grey);
 }
 
 ul, li {

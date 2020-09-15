@@ -29,43 +29,29 @@
 </script>
 
 <style>
-  .wrapper {
-    border-bottom: 1px solid #d4d4d4;
-  }
-
   .tabs {
     display: flex;
     flex-wrap: wrap;
   }
 
   .tab {
-    height: 50px;
-    padding: 0 20px;
-    margin: 0;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    line-height: 50px;
-    color: #acacac;
-    text-align: center;
-    vertical-align: middle;
-    border: 1px solid #d4d4d4;
-    display: inline-block;
+    border: 1px solid var(--light-grey);
+    color: var(--medium-grey);
     cursor: pointer;
-    margin-right: -1px;
-    margin-top: -1px;
+    font-size: 0.875rem;
+    line-height: 3.125rem;
+    margin: -1px -1px 0 0;
+    padding: 0 1.25rem;
   }
 
   .region-list {
     column-count: 3;
-    column-gap: 10px;
+    column-gap: 0.625rem;
   }
 
   .active-tab {
-    color: #fff;
-    background-color: #00d7a0;
-    border-color: #fff;
-    border-top-color: #d4d4d4;
-    border-bottom-color: #d4d4d4;
+    background-color: var(--green);
+    color: var(--white);
   }
 </style>
 
