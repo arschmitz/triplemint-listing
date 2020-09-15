@@ -13,7 +13,7 @@ export default class Listing {
     return this._data.unit.building.type
   }
 
-  get squareFeet () {
+  get surface () {
     return this._data.unit.surface ? this._data.unit.surface.toLocaleString() : ''
   }
 

@@ -200,6 +200,10 @@
     background-image: url(https://static.triplemint.com/jupiter/a9f7f1f974cf4e7690ddf77c6308317a3ccd70c1/static/images/search.svg);
     border: none;
   }
+
+  .hidden {
+    display: none;
+  }
 </style>
 
 <div class="search-menu">

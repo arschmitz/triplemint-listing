@@ -70,7 +70,7 @@
 <hr>
 
 <h2 class="heading">YEAR BUILT</h2>
-<select class="inline-select" id="max_year" on:change={updateFilter}>
+<select class="inline-select" disabled id="max_year" on:change={updateFilter}>
   <option value=""></option>
 	<option value="1600">Before 1900</option>
 	{#each years as year, index}
@@ -78,7 +78,7 @@
   {/each}
 </select>
 to
-<select class="inline-select" id="min_year" on:change={updateFilter}>
+<select class="inline-select" disabled  id="min_year" on:change={updateFilter}>
   <option value=""></option>
   <option value="1600">Before 1900</option>
   {#each years as year, index}

@@ -103,8 +103,8 @@
       <p class="price" >${currency(listing.price)}</p>
       <p class="summary">
         {listing.bedrooms} BD, {listing.bathrooms} BA,
-        {#if listing.squareFeet}
-          {listing.squareFeet} SF,
+        {#if listing.surface}
+          {listing.surface} SF,
         {/if}
         {listing.type}
       </p>
