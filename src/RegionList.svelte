@@ -8,7 +8,7 @@
   function dispatchClick(id) {
     dispatch('message', {
       id
-    });
+    })
   }
 </script>
 

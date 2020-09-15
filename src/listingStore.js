@@ -1,3 +1,3 @@
 import { writable } from 'svelte/store'
 
-export let listings = writable([])
+export const listings = writable([])

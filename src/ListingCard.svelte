@@ -3,7 +3,7 @@
   export let listing
 </script>
 
-<style>
+<style type="text/css">
   @font-face {
     font-family: 'ConduitMdITCTTMedium';
     src: url('https://static.triplemint.com/jupiter/88bc34243902da1a5457faa0804504956c832271/static/fonts/333DC2_3_0.eot');

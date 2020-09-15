@@ -15,7 +15,8 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "lint": "standard src/*.js",
+    "lint": "standard --fix src/*.js",
+    "lint-svelte": "standard --plugin html 'src/*.svelte'",
     "start": "sirv public"
   },
   "devDependencies": {
@@ -35,6 +36,7 @@
     "svelte-jester": "^1.1.5"
   },
   "dependencies": {
+    "eslint-plugin-html": "^6.1.0",
     "sirv-cli": "^1.0.0"
   },
   "jest": {

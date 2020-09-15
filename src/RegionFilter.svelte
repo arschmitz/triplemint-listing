@@ -1,16 +1,11 @@
 <script>
   import RegionList from './RegionList.svelte'
+  import regions from './regionData'
   import { createEventDispatcher } from 'svelte';
 
   const dispatch = createEventDispatcher();
   const activeRegions = []
-  let regions = []
   let activeRegionIndex = 2
-
-  async function fetchRegions () {
-    regions = await fetch(`https://www.triplemint.com/tmapi/options/region?fev=a9f7f1f974cf4e7690ddf77c6308317a3ccd70c1`)
-    .then(r => r.json())
-  }
 
   function updateFilter (data) {
     if (activeRegions.indexOf(data.detail.id) > -1) {
@@ -24,8 +19,6 @@
       name: 'region'
     })
   }
-
-  fetchRegions()
 </script>
 
 <style>
@@ -57,7 +50,7 @@
 
 <div class="neighborhood-filter">
   <ul class="tabs">
-    {#each regions as region, index}
+    {#each $regions as region, index}
       {#if region.address_parts.length > 1}
         <li class="tab{activeRegionIndex === index ? ' active-tab' : ''}" on:click="{e => activeRegionIndex = index}">{region.address_parts[0]}</li>
       {/if}
@@ -65,8 +58,8 @@
   </ul>
 
   <div class="region-list">
-    {#if regions.length}
-      <RegionList regions={regions[activeRegionIndex].children} on:message={updateFilter}/>
+    {#if $regions.length}
+      <RegionList regions={$regions[activeRegionIndex].children} on:message={updateFilter}/>
     {/if}
   </div>
 </div>

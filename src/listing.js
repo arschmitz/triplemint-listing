@@ -1,8 +1,8 @@
-function currency(amount) {
+function currency (amount) {
   return Number((amount).toFixed(1)).toLocaleString()
 }
 
-const imageBase = "https://dyn-images.triplemint.com/production/images/unit/"
+const imageBase = 'https://dyn-images.triplemint.com/production/images/unit/'
 export default class Listing {
   constructor (data) {
     this._data = data
@@ -33,7 +33,7 @@ export default class Listing {
   }
 
   get price () {
-    return this._data.price
+    return currency(this._data.price)
   }
 
   get image () {

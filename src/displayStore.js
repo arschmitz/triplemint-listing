@@ -1,3 +1,3 @@
 import { writable } from 'svelte/store'
 
-export let display = writable('photos')
+export const display = writable('photos')
