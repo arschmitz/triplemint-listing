@@ -4,22 +4,27 @@ import { filteredListings } from './listingStore'
 import { get } from 'svelte/store'
 import { fireEvent, render } from '@testing-library/svelte'
 
-const modals = ['Neighborhoods', 'Price', 'More Filters', 'Bedrooms']
+const modals = [
+  { text: 'Neighborhoods', class: 'region' },
+  { text: 'Price', class: 'price' },
+  { text: 'More Filters', class: 'more' },
+  { text: 'Bedrooms', class: 'bedroom' }
+]
 
 modals.forEach((modal) => {
-  test(`Show and hide ${modal} menu`, async () => {
+  test(`Show and hide ${modal.class} menu`, async () => {
     const { container, getByText } = render(SearchBar)
-    const neighborhoods = getByText(modal)
+    const menu = getByText(modal.text)
 
-    await fireEvent.click(neighborhoods)
+    await fireEvent.click(menu)
 
-    expect(container.querySelectorAll('.modal')).toHaveLength(1)
+    expect(container.querySelector(`.${modal.class}-modal`)).toBeVisible()
 
     const close = container.querySelector('.close-modal')
 
     await fireEvent.click(close)
 
-    expect(container.querySelectorAll('.modal')).toHaveLength(0)
+    expect(container.querySelector(`.${modal.class}-modal`)).not.toBeVisible()
   })
 })
 
@@ -30,14 +35,14 @@ test('Clicking a second menu swaps menus', async () => {
 
   await fireEvent.click(neighborhoods)
 
-  expect(container.querySelectorAll('.neighborhood-filter')).toHaveLength(1)
-  expect(container.querySelectorAll('.modal')).toHaveLength(1)
+  expect(container.querySelector('.neighborhood-filter')).toBeVisible()
+  expect(container.querySelector('.region-modal')).toBeVisible()
 
   await fireEvent.click(price)
 
-  expect(container.querySelectorAll('.neighborhood-filter')).toHaveLength(0)
+  expect(container.querySelector('.neighborhood-filter')).not.toBeVisible()
   expect(getByText('PRICE')).toBeTruthy()
-  expect(container.querySelectorAll('.modal')).toHaveLength(1)
+  expect(container.querySelector('.price-modal')).toBeVisible()
 })
 
 test('Clicking a bedroom button updates results', async () => {
@@ -59,6 +64,27 @@ test('Clicking a bedroom button updates results', async () => {
   expect(studio).not.toHaveClass('filter-active')
   expect(container.querySelector('.results')).toHaveTextContent('400 Results')
   expect(get(filteredListings)).toHaveLength(400)
+})
+
+test('Filters maintain state after closing and reopening', async () => {
+  const { container, getByText } = render(SearchBar)
+  const bedrooms = getByText('Bedrooms')
+
+  await fireEvent.click(bedrooms)
+
+  const studio = getByText('Studio')
+  await fireEvent.click(studio)
+
+  expect(studio).toHaveClass('filter-active')
+  expect(container.querySelector('.results')).toHaveTextContent('43 Results')
+  expect(get(filteredListings)).toHaveLength(43)
+
+  const close = container.querySelector('.close-modal')
+
+  await fireEvent.click(close)
+
+  await fireEvent.click(bedrooms)
+  expect(studio).toHaveClass('filter-active')
 })
 
 test('Selecting neighborhoods updates results', async () => {

@@ -242,24 +242,23 @@
     </li>
   </ul>
 </div>
-{#if open === 'bedroom'}
+<div class="search-modal bedroom-modal" class:hidden="{open !== 'bedroom'}">
   <Modal on:close="{e => open = false}">
     <BedroomFilter on:update="{event => updateFilters(event.detail.name, event.detail.filter)}"/>
   </Modal>
-{/if}
-{#if open === 'region'}
+</div>
+<div class="search-modal region-modal" class:hidden="{open !== 'region'}">
   <Modal on:close="{e => open = false}">
     <RegionFilter on:update="{event => updateFilters(event.detail.name, event.detail.filter)}"/>
   </Modal>
-{/if}
-{#if open === 'price'}
+</div>
+<div class="search-modal price-modal" class:hidden="{open !== 'price'}">
   <Modal on:close="{e => open = false}">
     <PriceFilter on:update="{event => updateFilters(event.detail.name, event.detail.filter)}"/>
   </Modal>
-{/if}
-
-{#if open === 'more'}
+</div>
+<div class="search-modal more-modal" class:hidden="{open !== 'more'}">
   <Modal on:close="{e => open = false}">
     <MoreFilters on:update="{event => updateFilters(event.detail.name, event.detail.filter)}"/>
   </Modal>
-{/if}
+</div>
