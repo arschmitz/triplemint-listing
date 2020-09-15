@@ -15,7 +15,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "lint": "standard --fix src/*.js",
+    "lint": "standard src/*.js",
     "lint-svelte": "standard --plugin html 'src/*.svelte'",
     "start": "sirv public",
     "test": "jest src"
@@ -52,6 +52,12 @@
           }
         }
       ]
+    ]
+  },
+  "standard": {
+    "globals": [
+      "test",
+      "expect"
     ]
   },
   "jest": {

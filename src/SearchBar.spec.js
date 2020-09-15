@@ -2,7 +2,7 @@ import '@testing-library/jest-dom/extend-expect'
 import SearchBar from './SearchBar.svelte'
 import { filteredListings } from './listingStore'
 import { get } from 'svelte/store'
-import { fireEvent, render, waitForElementToBeRemoved } from '@testing-library/svelte'
+import { fireEvent, render } from '@testing-library/svelte'
 
 const modals = ['Neighborhoods', 'Price', 'More Filters', 'Bedrooms']
 
@@ -23,7 +23,7 @@ modals.forEach((modal) => {
   })
 })
 
-test(`Clicking a second menu swaps menus`, async () => {
+test('Clicking a second menu swaps menus', async () => {
   const { container, getByText } = render(SearchBar)
   const neighborhoods = getByText('Neighborhoods')
   const price = getByText('Price')
